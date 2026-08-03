@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { client } = require("../config/db");
 
 const userCollection = client.db("snapdeal").collection("users");
@@ -10,9 +11,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   const { id } = req.params;
   const query = { _id: new ObjectId(id) };
-  if (!ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "Invalid user ID" });
-  }
+
   const user = await userCollection.findOne(query);
   if (!user) {
     return res.status(404).json({ error: "User not found" });
