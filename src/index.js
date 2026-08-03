@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { run } = require("./config/db");
 const userRoutes = require("./routes/Route.user");
+const productRoutes = require("./routes/Route.product");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 run();
 // routes
 app.use("/users", userRoutes);
+app.use("/products", productRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the SnapDeal API 😀😀😀 🚀👩‍🚀");
